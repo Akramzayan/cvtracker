@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { cx } from "../lib/cx";
 import Link from "next/link";
+import Image from "next/image";
 
 
 export const TopNavbar = () => {
@@ -16,7 +17,20 @@ export const TopNavbar = () => {
      ,isHome && "bg-dot")}>
         <div className="flex h-10 w-full justify-between">
             <Link href="/">
-                <h2 className="text-xl text-primary"> Resume Builder & Parser </h2>
+              <div className="flex justify-center items-center gap-1">
+                <Image
+                src={"assets/heart.svg"}
+                width={16}
+                height={16}
+                alt="Logo"
+                className="h-8 w-full"
+                priority
+
+                />
+                 <h2 className="text-xl whitespace-nowrap text-blue-400 font-bold"> Resume Builder & Parser </h2>
+
+              </div>
+               
             </Link>
             <nav aria-label="Site Navbar" className="flex items-center gap-2 text-sm font-medium">
               {
