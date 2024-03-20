@@ -14,8 +14,8 @@ export const Hero =() => {
                 <p className="mt-3 text-lg lg:mt-5 lg:text-xl">
                     With This Powerful Resume Builder
                 </p>
-                <Link href={"/resume-import"} className="mt-6 btn-primary lg:mt-14">
-                    <p className="ml-6 mt-3 text-sm text-bold text-gray-600"> Get Started</p>
+                <Link href={"/resume-import"} className="mt-6 lg:mt-14">
+                    <p className="ml-6 mt-3 text-sm text-bold  btn-primary"> Get Started</p>
                     <p className="mt-3 text-sm text-bold text-gray-600 lg:mt-36">
                         Already Have a Resume ? Test its ATS Readabilty Here with the {""}
                         <Link href={"/resume-parser"} className="underline underline-offset-2">

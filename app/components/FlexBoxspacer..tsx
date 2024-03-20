@@ -10,8 +10,5 @@ export const FlexBoxspacer =({
 }) => {
     return ( <div className={`invisible shrink-[10000] grow ${className}`}
     style={{maxWidth:`${maxWidth}px`,minWidth:`${minWidth}px`}}/>)
-   
-
-  
 
 }
