@@ -27,7 +27,7 @@ export const TopNavbar = () => {
                 priority
 
                 />
-                 <h2 className="text-xl whitespace-nowrap text-blue-400 font-bold"> Resume Builder & Parser </h2>
+                 <h2 className="text-xl whitespace-nowrap text-primary font-bold"> Resume Builder & Parser </h2>
 
               </div>
                
