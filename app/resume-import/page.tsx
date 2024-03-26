@@ -1,0 +1,88 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { getHasUsedBefore } from "../lib/redux/local-storage";
+import Link from "next/link";
+
+export default function ImportResume() {
+  const [hasUsedAppBefore, setHasUsedAppBefore] = useState(false);
+  const [hasAddedResume, setHasAddedResume] = useState(false);
+
+  const onFileUrlChange = (fileUrl: string) => {
+    setHasAddedResume(Boolean(fileUrl));
+  };
+
+  useEffect(() => {
+    setHasUsedAppBefore(getHasUsedBefore());
+  }, []);
+
+  return (
+    <main>
+      <div className="mx-auto mt-14 max-w-3xl rounded-md border-gray-200 px-10 py-10 text-center shadow-md">
+        {!hasUsedAppBefore ? (
+          <>
+            <h1 className="text-lg font-semibold text-gray-900">
+              Import Data from Your Existing Resume
+            </h1>
+            <h2> Resume Drop Zone Components To built Later </h2>
+            {!hasAddedResume &&
+             <>
+             <Divider/>
+             <SectionWithHeadingAndCreateButton heading="Don't have a Resume yet ? "
+              buttonText="Create A Resume From Scratch"/>  
+             </>}
+          </>
+        ) : (
+          <>
+          {!hasAddedResume && (
+            <>
+            <SectionWithHeadingAndCreateButton heading="You Have data saved in browser from your last session" buttonText="Continue where you left off"/>
+            <Divider/>
+            </>
+          )}
+          <h1 className="font-semibold text-gray-900">
+            OverRide Data with a New Resume
+
+          </h1>
+          <h2>
+            Resume Drop Zone Components to be built later
+          </h2>
+          </>
+        )}
+      </div>
+    </main>
+  );
+}
+
+const Divider = () => (
+      //1 rem equals to 16 px
+  <div className="mx-[-2.5rem] flex items-center pb-6 pt-8" aria-hidden="true">
+  <div className="flex-grow border-t border-gray-200" />
+  <span className="mx-2 mt-[-2px] flex-shrink text-lg text-gray-400">or</span>
+  <div className="flex-grow border-t border-gray-200" />
+</div>
+)
+
+
+
+const SectionWithHeadingAndCreateButton = ({
+  heading,
+  buttonText,
+}: {
+  heading: string;
+  buttonText: string;
+}) => {
+  return (
+    <>
+      <p className="font-semibold text-gray-900"> {heading}</p>
+      <div className="mt-5">
+        <Link
+          href={"/resume-builder"}
+          className="outline-theme-blue rounded-full bg-sky-500 px-6 pb-2 pt-1.5 text-base font-semibold text-white"
+        >
+          {buttonText}
+        </Link>
+      </div>
+    </>
+  );
+};
