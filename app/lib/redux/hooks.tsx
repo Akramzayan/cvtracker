@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { AppDispatch, store,RootState } from "./store"
-import { saveStateToLocalStorage } from "./local-storage"
+import { loadStateFromLocalStorage, saveStateToLocalStorage } from "./local-storage"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
  
 
@@ -22,4 +22,11 @@ export const useSaveStateToLocalStorageOnChange = ()=>{
 
 export const useSetInitialStore =()=> {
     const dispatch = useAppDispatch();
+    useEffect(()=>{
+        const state = loadStateFromLocalStorage()
+        if(!state)return
+        if(state.resume){
+            
+        }
+    })
 }
