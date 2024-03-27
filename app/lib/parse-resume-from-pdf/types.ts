@@ -37,3 +37,4 @@ export interface TextScore {
 }
 
 export type TextScores = TextScore[];
+
