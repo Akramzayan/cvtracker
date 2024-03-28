@@ -1,4 +1,4 @@
-import {  TextItems } from "./types";
+import {  TextItems,TextItem } from "./types";
 import * as pdfjs from "pdfjs-dist";
 
 
@@ -30,11 +30,25 @@ export const readPdf = async (fileUrl: string): Promise<TextItems> => {
       const y=transform[5]
       const fontObj = commonObjs.get(pdfFontName);
       const fontName = fontObj.name;
-
-
-    })
-  
+      const newText = text.replace(/--/g,"-");
+      const newItem ={
+        ...otherProps,
+        fontName,
+        text:newText,
+        x,
+        y,
+        
+      };
+      return newItem
+    });
+    //some changes here
+    //textItems.push(...pageTextItems);
+    textItems.push(...pageTextItems.map((item) => ({ ...item, hasEndOfLine: false })));
+    
   }
+  const isEmptySpace =(textItem:TextItem)=>!textItem.hasEndOfLine && textItem.text.trim()==="";
+  textItems= textItems.filter((textItem)=>!isEmptySpace(textItem))
+  return textItems;
 }
 
 
