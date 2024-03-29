@@ -1,4 +1,5 @@
 import { groupTextItemsIntoLines } from "./group-text-items-into-lines"
+import { groupLinesIntoSections } from "./groupe-lines-into-sections"
 import { readPdf } from "./read-pdf"
 
 export const parseResumeFromPdf = async(fileUrl:string) => {
@@ -7,5 +8,7 @@ export const parseResumeFromPdf = async(fileUrl:string) => {
 
     //Second step is group TEXT ITEMS INTO LINES
     const lines = groupTextItemsIntoLines(textItems)
+    //THIRD STEP IS TO GROUP LINES INTO SECTIONS
+    const sections = groupLinesIntoSections(lines)
 
 }
