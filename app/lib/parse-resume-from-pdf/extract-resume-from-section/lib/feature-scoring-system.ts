@@ -1,3 +1,4 @@
+import { text } from "stream/consumers";
 import { FeatureSet, TextItems, TextScores } from "../../types";
 
 
@@ -50,5 +51,24 @@ export const getTextWithHighestFeatureScore = (
     returnEmptyStringIfHighestScoreIsNotPositive = true,
     returnConcatenatedString=false
     )=> {
+        const textScores = computeFeatureScores(textItems,featureSets)
+        let textsWithHighestFeatureScore : string[]=[]
+        let highestScore= -Infinity
 
+        for(const {text,score} of textScores){
+            if(score>= highestScore){
+                if(score>highestScore){
+                    textsWithHighestFeatureScore=[]
+                }
+                textsWithHighestFeatureScore.push(text)
+                highestScore=score;
+
+            }
+           
+        }
+        if(returnEmptyStringIfHighestScoreIsNotPositive && highestScore<=0){
+            return ["",textScores] as const ;
+        }
+        const text = ! returnConcatenatedString ?textsWithHighestFeatureScore[0] ??"":textsWithHighestFeatureScore.map((s) => s.trim()).join("")
+        return [text,textScores] as const;
     }
