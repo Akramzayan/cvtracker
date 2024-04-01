@@ -1,0 +1,54 @@
+import { FeatureSet, TextItems, TextScores } from "../../types";
+
+
+const computeFeatureScores = (
+    textItems: TextItems,
+    featureSets: FeatureSet[]
+): TextScores => {
+    const textScores = textItems.map((item) => ({
+        text: item.text,
+        score: 0,
+        match: false
+    }));
+for (let i=0;i<textItems.length;i++){
+    const textItem = textItems[i]
+
+    for (const FeatureSet of featureSets){
+        const [hasFeature ,score ,returnMatchingTextOnly] = FeatureSet
+        const result = hasFeature(textItem)
+        if(result) {
+            let text = textItem.text
+            if(returnMatchingTextOnly && typeof result ==="object"){
+                text = result[0]
+
+            }
+            const textScore = textScores[i]
+            if(textItem.text ===text){
+                textScore.score = score
+                if(returnMatchingTextOnly){
+                    textScore.match=true
+                }
+            }
+            else {
+                textScores.push({text,score,match:true})
+            }
+
+        }
+    }
+
+}
+return textScores
+}
+
+
+
+
+
+export const getTextWithHighestFeatureScore = (
+    textItems:TextItems,
+    featureSets:FeatureSet[],
+    returnEmptyStringIfHighestScoreIsNotPositive = true,
+    returnConcatenatedString=false
+    )=> {
+
+    }
