@@ -12,7 +12,7 @@ const SECTION_TITLE_PRIMARY_KEYWORDS =[
 ]
 
 const SECTION_TITLE_SECONDARY_KEYWORDS =[
-    "job","company","position","title","role","responsibility","summary"
+    "job","company","position","title","role","responsibility","summary","objective"
 ]
 
 const SECTION_TITLE_KEYWORDS =[
