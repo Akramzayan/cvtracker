@@ -1,6 +1,21 @@
+import { isBold } from "../../groupe-lines-into-sections";
 import { Subsections, line, lines } from "../../types";
 
 export const divideSectionIntoSubsections =(lines:lines) :Subsections => {
+    const IsLineNewSubsectionByLineGap = createIsLineSubsectionByLineGap(lines)
+
+    let subsections = createSubsections(lines,IsLineNewSubsectionByLineGap);
+    if(subsections.length>1){
+        const isLineNewSubSectionByBold=(line:line,prevLine:line) => {
+            if(isBold(prevLine[0])&& isBold(line[0])){
+                return true
+            }
+            return false
+        }
+        subsections=createSubsections(lines,isLineNewSubSectionByBold)
+
+    }
+    return subsections
 
 }
 
@@ -33,5 +48,34 @@ const createIsLineSubsectionByLineGap=(lines:lines
         }
         return IsLineNewSubsection
 
+
+}
+
+const createSubsections =(
+    lines:lines,
+    isLineNewSubsection : IsLineNewSubsection
+
+): Subsections => {
+    const subsections: Subsections = [];
+    let subsection:lines=[];
+
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        if (i === 0) {
+            subsection.push(line);
+            continue
+        }
+        if(isLineNewSubsection(line,lines[i-1])){
+            subsections.push(subsection);
+            subsection =[]
+        }
+        subsection.push(line);
+
+    }
+    if(subsection.length>0){
+        subsections.push(subsection);
+
+    }
+    return subsections
 
 }
