@@ -1,8 +1,9 @@
+import { get } from "http";
 import { ResumeWorkExperience } from "../../redux/types";
 import { isBold } from "../groupe-lines-into-sections";
 import { FeatureSet, ResumeSectionToLines, TextItem } from "../types";
 import { hasNumber } from "./extract-profile";
-import { getDescriptionsLineIndex } from "./lib/bullet-points";
+import { getBulletPointsFromLines, getDescriptionsLineIdx } from "./lib/bullet-points";
 import { DATE_FEATURE_SETS, getHasText } from "./lib/common-features";
 import { getTextWithHighestFeatureScore } from "./lib/feature-scoring-system";
 import { getSectionlinesByKeyword } from "./lib/get-section.lines";
@@ -59,7 +60,7 @@ export const extractWorkExperience = (sections: ResumeSectionToLines) => {
 
   for (const subsectionLines of subsections) {
     const descriptionsLineIndex =
-      getDescriptionsLineIndex(subsectionLines) ?? 2; // 2 is the default value if it is undefined
+    getDescriptionsLineIdx(subsectionLines) ?? 2; // 2 is the default value if it is undefined
 
     const subsectionInfoTextItems = subsectionLines
       .slice(0, descriptionsLineIndex)
@@ -88,6 +89,13 @@ export const extractWorkExperience = (sections: ResumeSectionToLines) => {
     );
 
 const subsectionDescriptionLines = subsectionLines.slice(descriptionsLineIndex);
-
+const descriptions=getBulletPointsFromLines(subsectionDescriptionLines);
+workExperiences.push({company,date,jobTitle,descriptions});
+workExperiencesScores.push({
+  companyScores,
+  dateScores,
+  jobTitleScores,
+})
   }
+  return{workExperiences,workExperiencesScores};
 };
