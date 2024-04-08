@@ -79,8 +79,8 @@ const LOCATION_FEATURE_SETS: FeatureSet[] = [
 
 const URL_FEATURE_SETS: FeatureSet[] = [
   [matchUrl, 4, true],
-  [matchUrlHttp, 4, true],
-  [matchUrlwww, 4, true],
+  [matchUrlHttp, 3, true],
+  [matchUrlwww, 3, true],
   [isBold, -1],
   [hasAt, -4],
   [hasParenthesis, -3],
@@ -95,7 +95,7 @@ const SUMMARY_FEATURE_SETS: FeatureSet[] = [
   [matchCityAndState, -4, false],
 ];
 
-const extractProfile = (sections: ResumeSectionToLines) => {
+export const extractProfile = (sections: ResumeSectionToLines) => {
   const lines = sections.profile || [];
   const textItems = lines.flat();
   const [name, nameScores] = getTextWithHighestFeatureScore(
@@ -133,13 +133,13 @@ const extractProfile = (sections: ResumeSectionToLines) => {
   const summarySection = summaryLines
     .flat()
     .map((textItem) => textItem.text)
-    .join("");
+    .join(" ");
     
   const objectiveLines = getSectionlinesByKeyword(sections, ["objective"]);
   const objectiveSection= objectiveLines
   .flat()
   .map((textItem) => textItem.text)
-  .join("");
+  .join(" ");
 
   return {
     profile :{
