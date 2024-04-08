@@ -87,14 +87,26 @@ export const extracEducation = (sections: ResumeSectionToLines) => {
     });
 
     educationScores.push({
-        SchoolScores,
-        degreeScores,
-        gpaScores,
-        dateScores,
+      SchoolScores,
+      degreeScores,
+      gpaScores,
+      dateScores,
     });
   }
-if(educations.length !==0) {
-    const courseLines = getSectionlinesByKeyword(sections, ["courses"]);
-}
-   
+  if (educations.length !== 0) {
+    const courseLines = getSectionlinesByKeyword(sections, ["course"]);
+    if (courseLines.length !== 0) {
+      educations[0].descriptions.push(
+        "Courses:" +
+          courseLines
+            .flat()
+            .map((item) => item.text)
+            .join(" ")
+      );
+    }
+  }
+  return {
+    educations,
+    educationScores,
+  }
 };
