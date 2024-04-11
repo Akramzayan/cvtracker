@@ -71,24 +71,24 @@ export const ResumeDropZone =({
     }
 
     const onImportClick = async() => {
-        //const resume = await parseResumeFromPdf(file.fileUrl)
-        //const settings = deepClone(initialSettings)
-        //if(getHasUsedBefore()){
-            //const sections = Object.keys(settings.formToShow) as ShowForm[]
-            //const sectionToFormToShow :Record<ShowForm,boolean> ={
-                //workExperiences:resume.workExperiences.length>0,
-                //educations:resume.educations.length>0,
-                //projects:resume.projects.length>0,
-                //skills:resume.skills.descriptions.length>0,
-                //custom:resume.custom.descriptions.length>0
+        const resume = await parseResumeFromPdf(file.fileUrl)
+        const settings = deepClone(initialSettings)
+        if(getHasUsedBefore()){
+            const sections = Object.keys(settings.formToShow) as ShowForm[]
+            const sectionToFormToShow :Record<ShowForm,boolean> ={
+                workExperiences:resume.workExperiences.length>0,
+                educations:resume.educations.length>0,
+                projects:resume.projects.length>0,
+                skills:resume.skills.descriptions.length>0,
+                custom:resume.custom.descriptions.length>0
 
-            //}
-            //for (const section  of sections){
-                //settings.formToShow[section] = sectionToFormToShow[section]
-           // }
-        //}
-        //saveStateToLocalStorage({resume,settings})
-        //router.push("/resume-builder")
+            }
+            for (const section  of sections){
+                settings.formToShow[section] = sectionToFormToShow[section]
+           }
+        }
+        saveStateToLocalStorage({resume,settings})
+        router.push("/resume-builder")
     }
 
     return (

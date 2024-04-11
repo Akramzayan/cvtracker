@@ -27,7 +27,7 @@ export const TopNavbar = () => {
                 priority
 
                 />
-                 <h2 className="text-xl whitespace-nowrap text-primary font-bold"> Carrer Tracker</h2>
+                 <h2 className="text-xl whitespace-nowrap text-primary font-bold"> CarrerTracker</h2>
 
               </div>
                
