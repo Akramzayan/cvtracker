@@ -45,9 +45,7 @@ export default function ImportResume() {
             OverRide Data with a New Resume
 
           </h1>
-          <h2>
-            Resume Drop Zone Components to be built later
-          </h2>
+          <ResumeDropZone onFileUrlChange={onFileUrlChange} className="mt-5" />
           </>
         )}
       </div>
