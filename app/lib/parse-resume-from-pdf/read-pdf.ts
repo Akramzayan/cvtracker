@@ -1,7 +1,8 @@
 import {  TextItems,TextItem } from "./types";
+
 import * as pdfjs from "pdfjs-dist";
-import pdfjsworker from "pdfjs-dist/build/pdf.worker.entry";
-pdfjs.GlobalWorkerOptions.workerSrc = pdfjsworker;
+import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry";
+pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 
 
@@ -45,8 +46,8 @@ export const readPdf = async (fileUrl: string): Promise<TextItems> => {
       return newItem
     });
     //some changes here
-    //textItems.push(...pageTextItems);
-    textItems.push(...pageTextItems.map((item) => ({ ...item, hasEndOfLine: false })));
+   // textItems.push(...pageTextItems);
+   textItems.push(...pageTextItems.map((item) => ({ ...item, hasEndOfLine: false })));
     
   }
   const isEmptySpace =(textItem:TextItem)=>!textItem.hasEndOfLine && textItem.text.trim()==="";

@@ -34,62 +34,67 @@ export const ResumeDropZone =({
 
     const router = useRouter()
 
-    const setNewFile =(newFile:File) => {
-        if(file.fileUrl){
-            URL.revokeObjectURL(file.fileUrl)
+   
+    const setNewFile = (newFile: File) => {
+        if (file.fileUrl) {
+          URL.revokeObjectURL(file.fileUrl);
         }
-        const {name,size} = newFile
-        const fileUrl = URL.createObjectURL(newFile)
-        setFile({name,size,fileUrl})
+    
+        const { name, size } = newFile;
+        const fileUrl = URL.createObjectURL(newFile);
+        setFile({ name, size, fileUrl });
+        onFileUrlChange(fileUrl);
+      };
 
-    }
+   
 
-    const onDrop =(event:React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault()
-        const newFile = event.dataTransfer.files[0]
-        if(newFile.name.endsWith(".pdf")){
-            setHasNonePdfFile(false)
-            setNewFile(newFile)
+    const onDrop = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        const newFile = event.dataTransfer.files[0];
+        if (newFile.name.endsWith(".pdf")) {
+          setHasNonePdfFile(false);
+          setNewFile(newFile);
+        } else {
+          setHasNonePdfFile(true);
         }
-        else{
-            setHasNonePdfFile(true)
-        }
-        setIsHoveredOnDropZone(false)
-    };
+        setIsHoveredOnDropZone(false);
+      };
 
+      
     const onRemove =() => {
         setFile(defaultFileState)
         onFileUrlChange("")
     }
 
-    const onInputChange = async(event:React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files
-        if(!files) return 
-        const newFile = files[0]
-        setNewFile(newFile)
+    
+    
+    const onInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const files = event.target.files;
+        if (!files) return;
+    
+        const newFile = files[0];
+        setNewFile(newFile);
+      };
 
+    const onImportClick = async () => {
+    const resume = await parseResumeFromPdf(file.fileUrl);
+    const settings = deepClone(initialSettings);
+    if (getHasUsedBefore()) {
+      const sections = Object.keys(settings.formToShow) as ShowForm[];
+      const sectionToFormToShow: Record<ShowForm, boolean> = {
+        workExperiences: resume.workExperiences.length > 0,
+        educations: resume.educations.length > 0,
+        projects: resume.projects.length > 0,
+        skills: resume.skills.descriptions.length > 0,
+        custom: resume.custom.descriptions.length > 0,
+      };
+      for (const section of sections) {
+        settings.formToShow[section] = sectionToFormToShow[section];
+      }
     }
-
-    const onImportClick = async() => {
-        const resume = await parseResumeFromPdf(file.fileUrl)
-        const settings = deepClone(initialSettings)
-        if(getHasUsedBefore()){
-            const sections = Object.keys(settings.formToShow) as ShowForm[]
-            const sectionToFormToShow :Record<ShowForm,boolean> ={
-                workExperiences:resume.workExperiences.length>0,
-                educations:resume.educations.length>0,
-                projects:resume.projects.length>0,
-                skills:resume.skills.descriptions.length>0,
-                custom:resume.custom.descriptions.length>0
-
-            }
-            for (const section  of sections){
-                settings.formToShow[section] = sectionToFormToShow[section]
-           }
-        }
-        saveStateToLocalStorage({resume,settings})
-        router.push("/resume-builder")
-    }
+    saveStateToLocalStorage({ resume, settings });
+    router.push("/resume-builder");
+  };
 
     return (
         <div className={cx(
