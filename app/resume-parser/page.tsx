@@ -90,20 +90,13 @@ export default function ResumeParser() {
                 you can also upload your own resume PDF to see the extraction
                 <span className="font-semibold text-purple-700 "> Add Your Resume Below </span>To Access The Extraction Results By The ATS Checker(ATS) Used in Job Application Process
             </Paragraph>
-            {/* <div className="mt-3">
-              <ResumeDropZone onFileUrlChange={(fileUrl) => setFileUrl(fileUrl|| defaultFileUrl)} playgroundView={true}/>   */}
-               <div className="mt-3">
-              <ResumeDropZone
-                onFileUrlChange={(fileUrl) =>
-                  setFileUrl(fileUrl /* || defaultFileUrl */)
-                }
-                playgroundView={true}
-              />
-            </div>
+             <div className="mt-3">
+              <ResumeDropZone onFileUrlChange={(fileUrl) => setFileUrl(fileUrl|| defaultFileUrl)} playgroundView={true}/>   
+              
               <Heading level={2} className="!mt-[1.2em]">
               Resume Parsing Results
             </Heading>
-            {/* </div> */}
+             </div> 
           </section>
         </div>
       </div>
