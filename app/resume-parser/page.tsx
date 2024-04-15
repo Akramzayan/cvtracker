@@ -11,6 +11,7 @@ import { Heading } from "../components/documentation/Heading";
 import { Paragraph } from "../components/documentation/Paragrapgh";
 import { cx } from "../lib/cx";
 import { ResumeDropZone } from "../components/ResumeDropZone";
+import { ResumeTable } from "./ResumeTable";
 
 const RESUME_EXAMPLES = [
   {
@@ -93,9 +94,10 @@ export default function ResumeParser() {
              <div className="mt-3">
               <ResumeDropZone onFileUrlChange={(fileUrl) => setFileUrl(fileUrl|| defaultFileUrl)} playgroundView={true}/>   
               
-              <Heading level={2} className="!mt-[1.2em]">
+              <Heading level={2} className="!mt-[1.2em] text-blue-500">
               Resume Parsing Results
             </Heading>
+            <ResumeTable resume={resume} />
              </div> 
           </section>
         </div>
