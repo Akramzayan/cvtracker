@@ -1,4 +1,6 @@
 import { ResumeProfile } from "@/app/lib/redux/types"
+import { ResumePDFSection, ResumePDFText } from "./common";
+import { spacing } from "./styles";
 
 export const ResumePDFProfile = ({
     profile,
@@ -14,6 +16,12 @@ export const ResumePDFProfile = ({
     const iconProps = {email,phone,location,url};
 
     return (
-        
+        <ResumePDFSection style={{
+            marginTop:spacing["4"]
+        }} >
+            <ResumePDFText bold={true} themeColor={themeColor} style={{fontSize:"20pt"}}>
+                {name}
+            </ResumePDFText>
+        </ResumePDFSection>
     )
 }

@@ -2,6 +2,7 @@ import { Text, View, Link } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
 import { styles, spacing } from "../styles";
 import { DEFAULT_FONT_COLOR } from "@/app/lib/redux/settingsSlice";
+import React from "react";
 
 export const ResumePDFSection = ({
   themeColor,
@@ -48,4 +49,24 @@ export const ResumePDFSection = ({
   </View>
 );
 
-
+export const ResumePDFText=({
+    bold=false,
+    themeColor,
+    style={},
+    children
+}:{
+    bold ?: boolean;
+    themeColor?:string;
+    style?:Style;
+    children:React.ReactNode
+}) => {
+    return (
+        <Text style={{
+            color:themeColor || DEFAULT_FONT_COLOR,
+            fontWeight:bold ? "bold":"normal",
+            ...style
+        }}>
+            {children}
+        </Text>
+    )
+}

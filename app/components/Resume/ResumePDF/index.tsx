@@ -2,6 +2,7 @@ import { DEFAULT_FONT_COLOR, Settings } from "@/app/lib/redux/settingsSlice";
 import { Resume } from "@/app/lib/redux/types";
 import {Document, Page, View} from "@react-pdf/renderer";
 import { styles,spacing } from "./styles";
+import { ResumePDFProfile } from "./ResumePDFProfile";
 
 
 export const ResumePDF =({
@@ -43,8 +44,8 @@ export const ResumePDF =({
                     padding:`${spacing[0]}${spacing[20]}`,
 
                 }}>
-                    <h1>Here Profile Component</h1>
-
+                    {/* <h1>Here Profile Component</h1> */}
+                    <ResumePDFProfile profile={profile} themeColor={themeColor} isPDF={isPDF}/>
                 </View>
 
             </Page>
