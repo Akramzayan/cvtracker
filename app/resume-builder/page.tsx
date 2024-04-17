@@ -3,6 +3,7 @@
 import { Provider } from "react-redux"
 import { store } from "../lib/redux/store"
 import { ResumeForm } from "../components/ResumeForm"
+import { Resume } from "../components/Resume"
 
 export default function Create(){
     return(
@@ -15,7 +16,7 @@ export default function Create(){
                     </div>
                     {/* right side */}
                     <div className="col-span-3">
-                        <h1> Live Preview Of our Edits in Resume Sheet</h1>
+                       <Resume/>
 
                     </div>
 
