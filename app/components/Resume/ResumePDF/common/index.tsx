@@ -97,3 +97,41 @@ export const ResumePDFLink = ({
   )
 
 }
+
+
+export const ResumePDFBulletList = ({
+  items,
+  showBulletPoints=true
+}:{
+  items:string[];
+  showBulletPoints?:boolean;
+
+}) => {
+  return (
+    <>
+    {items.map((item,idx) =>(
+      <View key={idx} style={styles.flexRow}>
+        {showBulletPoints && (
+          <ResumePDFText style={{
+            paddingLeft:spacing["2"],
+            paddingRight:spacing["2"],
+            lineHeight:"1.3"
+            }} 
+            bold={true}>
+              {"."}
+          </ResumePDFText>
+        )}
+        <ResumePDFText style={{
+          lineHeight:"1.3",
+          flexGrow:1,
+          flexBasis:0
+          }}>
+          {item}
+          </ResumePDFText>
+        
+      </View>
+    ))}
+    </>
+  )
+
+}
