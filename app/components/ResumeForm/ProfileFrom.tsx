@@ -29,7 +29,7 @@ export const ProfileForm = () => {
           label="Objective"
           labelClassName="col-span-full"
           name="summary"
-          placeholder="Summary of your career"
+          placeholder="Entrepreneur and innovator obsessed with making exceptional products"
           value={summary}
           onChange={handleProfileChange}
         />
@@ -37,7 +37,7 @@ export const ProfileForm = () => {
           label="Email"
           labelClassName="col-span-4"
           name="email"
-          placeholder="hello@gmail.com"
+          placeholder="hello@world.com"
           value={email}
           onChange={handleProfileChange}
         />
@@ -45,7 +45,7 @@ export const ProfileForm = () => {
           label="Phone"
           labelClassName="col-span-2"
           name="phone"
-          placeholder="+1 234 567 8900"
+          placeholder="(123)456-7890"
           value={phone}
           onChange={handleProfileChange}
         />

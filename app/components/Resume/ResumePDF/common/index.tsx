@@ -70,3 +70,30 @@ export const ResumePDFText=({
         </Text>
     )
 }
+
+
+export const ResumePDFLink = ({
+  src,
+  isPDF,
+  children,
+}:{
+  src:string;
+  isPDF:boolean;
+  children:React.ReactNode
+}) => {
+  if (isPDF){
+    return(
+      <Link src={src} style={{textDecoration:"none"}}>
+        {children}
+      </Link>
+    )
+  }
+
+  return (
+    // This value tells the browser not to send a referrer header when the user clicks on the linked resource.
+    <a href={src} style={{textDecoration:"none"}} target="_blank" rel="noreferrer">
+      {children}
+    </a>
+  )
+
+}
