@@ -1,5 +1,6 @@
 import { ArrowSmallUpIcon,ArrowSmallDownIcon, EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { IconButton } from "../../Button";
+import { TrashIcon } from "@heroicons/react/20/solid";
 
 type MoveIconButtonType ="up"|"down";
 
@@ -49,4 +50,21 @@ export const MoveIconButton =({
 
         </IconButton>
     )
+}
+
+export const DeleteIconButton=({
+    onClick,
+    tooltipText
+}:{
+    onClick:() => void;
+    tooltipText:string;
+}) => {
+    return(
+        <IconButton onClick={onClick} tooltipText={tooltipText} size="small">
+            <TrashIcon className="h-4 w-4 text-gray-400" aria-hidden="true"/>
+            <span className="sr-only"> {tooltipText}</span>
+
+        </IconButton>
+    )
+
 }
