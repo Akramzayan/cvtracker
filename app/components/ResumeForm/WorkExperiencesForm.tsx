@@ -4,12 +4,9 @@ import {
   selectWorkExperiences,
 } from "@/app/lib/redux/resumeSlice";
 import { Form, FormSection } from "./Form";
-
+import { CreateHandleChangeArgsWithDescriptions } from "./types";
 import { ResumeWorkExperience } from "@/app/lib/redux/types";
-import {  Input } from "./Form/InputGroup";
-import {CreateHandleChangeArgsWithDescriptions} from "./types"
-
-
+import {  BulletListTextArea, Input } from "./Form/InputGroup";
 
 export const WorkExperiencesForm = () => {
   const workExperiences = useAppSelector(selectWorkExperiences);
@@ -66,7 +63,14 @@ export const WorkExperiencesForm = () => {
               value={date}
               onChange={handleWorkExperienceChange}
             />
-           
+            <BulletListTextArea
+              label="Description"
+              labelClassName="col-span-full"
+              name="descriptions"
+              placeholder="Bullet points"
+              value={descriptions}
+              onChange={handleWorkExperienceChange}
+            />
           </FormSection>
         );
       })}
