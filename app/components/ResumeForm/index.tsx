@@ -9,12 +9,13 @@ import { ProfileForm } from "./ProfileFrom";
 import { ShowForm, selectFormsOrder } from "@/app/lib/redux/settingsSlice";
 import { WorkExperiencesForm } from "./WorkExperiencesForm";
 import { EducationsForm } from "./EducationsForm";
+import { ProjectsForm } from "./ProjectsForm";
 
 
 const formTypeToComponent :{[type in ShowForm] :() => JSX.Element} = {
   workExperiences:WorkExperiencesForm,
   educations:() => <EducationsForm/>  ,
-  projects:() => <></>,
+  projects:() => <ProjectsForm/>,
   skills:() => <></>,
   custom:() => <></>
 

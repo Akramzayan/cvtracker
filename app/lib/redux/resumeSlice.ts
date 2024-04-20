@@ -104,6 +104,15 @@ export const resumeSlice = createSlice({
           education[field]=value as any;
 
         },
+        changeProjects:(
+          draft,
+          action:PayloadAction<CreateChangeActionWithDescriptions<ResumeProject>>
+        ) => {
+          const {idx,field,value}=action.payload;
+          const project=draft.projects[idx];
+          project[field]=value as any;
+
+        },
       changeSkills:(
         draft,
         action:PayloadAction<| {field:"descriptions"; value:string[]}|{
@@ -235,6 +244,7 @@ export const {
   changeProfile,
   changeWorkExperience,
   changeEducation, 
+  changeProjects,
   changeSkills,
   changeCustom,
   addSectionInForm,
