@@ -5,6 +5,7 @@ import { styles, spacing } from "./styles";
 import { ResumePDFProfile } from "./ResumePDFProfile";
 import { ShowForm } from "@/app/lib/redux/settingsSlice";
 import { ResumePDFWorkExperience } from "./ResumePDFWorkExperience";
+import { ResumePDFEducation } from "./ResumePDFEducations";
 
 export const ResumePDF = ({
   resume,
@@ -15,9 +16,9 @@ export const ResumePDF = ({
   settings: Settings;
   isPDF?: boolean;
 }) => {
-  const { profile, workExperiences } = resume;
+  const { profile, workExperiences,educations } = resume;
   const { name } = profile;
-  const { documentSize, fontFamily, fontSize, themeColor, formToHeading,formsOrder,formToShow } =
+  const { documentSize, fontFamily, fontSize, themeColor, formToHeading,formsOrder,formToShow,showBulletPoints } =
     settings;
 
     const showFormsOrder = formsOrder.filter((form) =>formToShow[form]);
@@ -30,7 +31,11 @@ export const ResumePDF = ({
         themeColor={themeColor}
       />
     ),
-    educations:() => <></>,
+    educations:() => <ResumePDFEducation
+    heading={formToHeading["educations"]}
+    educations={educations}
+    themeColor={themeColor}
+    showBulletPoints={showBulletPoints["educations"]}/>,
     projects:() => <></>,
     skills:() => <></>,
     custom:() => <></>

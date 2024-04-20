@@ -1,70 +1,91 @@
-import { ArrowSmallUpIcon,ArrowSmallDownIcon, EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowSmallUpIcon,
+  ArrowSmallDownIcon,
+  EyeIcon,
+  EyeSlashIcon,
+} from "@heroicons/react/24/outline";
 import { IconButton } from "../../Button";
-import { TrashIcon } from "@heroicons/react/20/solid";
+import { ListBulletIcon, TrashIcon } from "@heroicons/react/20/solid";
 
-type MoveIconButtonType ="up"|"down";
+type MoveIconButtonType = "up" | "down";
 
-export const ShowIconButton=({
-    show,
-    setShow
-}:{
-    show:boolean;
-    setShow:(show:boolean) => void;
+export const ShowIconButton = ({
+  show,
+  setShow,
+}: {
+  show: boolean;
+  setShow: (show: boolean) => void;
 }) => {
-    const tooltipText =show ? "Hide Section" : "Show Section";
-    const onClick =() =>{
-        setShow(!show);
-    }
+  const tooltipText = show ? "Hide Section" : "Show Section";
+  const onClick = () => {
+    setShow(!show);
+  };
 
-    const Icon = show ? EyeIcon : EyeSlashIcon;
+  const Icon = show ? EyeIcon : EyeSlashIcon;
 
-    return (
-        <IconButton onClick ={onClick} tooltipText={tooltipText}>
-            <Icon className="h-6 w-6 text-gray-400 " aria-hidden="true" />
-            <span className="sr-only"> {tooltipText}</span>
-        </IconButton>
-    )
-}
+  return (
+    <IconButton onClick={onClick} tooltipText={tooltipText}>
+      <Icon className="h-6 w-6 text-gray-400 " aria-hidden="true" />
+      <span className="sr-only"> {tooltipText}</span>
+    </IconButton>
+  );
+};
 
-export const MoveIconButton =({
-    type,
-    size="medium",
-    onClick
-}:{
-    type:MoveIconButtonType;
-    size?:"small" |"medium"
-    onClick:(type:MoveIconButtonType)=> void;
+export const MoveIconButton = ({
+  type,
+  size = "medium",
+  onClick,
+}: {
+  type: MoveIconButtonType;
+  size?: "small" | "medium";
+  onClick: (type: MoveIconButtonType) => void;
 }) => {
-    const tooltipText =type ==="up" ? "Move Up" :"Move Down";
-    const sizeClassName = size ==="medium"? "h-6 w-6" :"h-4 w-4";
-    const Icon =type ==="up" ? ArrowSmallUpIcon : ArrowSmallDownIcon;
+  const tooltipText = type === "up" ? "Move Up" : "Move Down";
+  const sizeClassName = size === "medium" ? "h-6 w-6" : "h-4 w-4";
+  const Icon = type === "up" ? ArrowSmallUpIcon : ArrowSmallDownIcon;
 
-    return (
-        <IconButton onClick={() => onClick(type)}
-        tooltipText={tooltipText}
-        size={size}>
-            <Icon className={`${sizeClassName} text-gray-400`} aria-hidden="true"/>
-            <span className="sr-only">
-                {tooltipText}
-            </span>
+  return (
+    <IconButton
+      onClick={() => onClick(type)}
+      tooltipText={tooltipText}
+      size={size}
+    >
+      <Icon className={`${sizeClassName} text-gray-400`} aria-hidden="true" />
+      <span className="sr-only">{tooltipText}</span>
+    </IconButton>
+  );
+};
 
-        </IconButton>
-    )
-}
-
-export const DeleteIconButton=({
-    onClick,
-    tooltipText
-}:{
-    onClick:() => void;
-    tooltipText:string;
+export const DeleteIconButton = ({
+  onClick,
+  tooltipText,
+}: {
+  onClick: () => void;
+  tooltipText: string;
 }) => {
-    return(
-        <IconButton onClick={onClick} tooltipText={tooltipText} size="small">
-            <TrashIcon className="h-4 w-4 text-gray-400" aria-hidden="true"/>
-            <span className="sr-only"> {tooltipText}</span>
+  return (
+    <IconButton onClick={onClick} tooltipText={tooltipText} size="small">
+      <TrashIcon className="h-4 w-4 text-gray-400" aria-hidden="true" />
+      <span className="sr-only"> {tooltipText}</span>
+    </IconButton>
+  );
+};
 
-        </IconButton>
-    )
-
-}
+export const BulletListIconButton = ({
+  onClick,
+  showBulletPoints,
+}: {
+  onClick: (newShowBulletPoints: boolean) => void;
+  showBulletPoints: boolean;
+}) => {
+  const tooltipText = showBulletPoints
+    ? "Hide Bullet Points"
+    : "Show Bullet Points";
+return(
+    <IconButton onClick={() => onClick(!showBulletPoints)} tooltipText={tooltipText} size="small"
+    className={showBulletPoints? "bg-sky-100" :""}>
+        <ListBulletIcon className={`h-4 w-4${showBulletPoints ? "text-gray-700" :"text-gray-400"}`} arria-hidden="true"/>
+        <span className="sr-only"> {tooltipText}</span>
+    </IconButton>
+)
+};
