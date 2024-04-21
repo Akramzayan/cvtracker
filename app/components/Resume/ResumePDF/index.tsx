@@ -8,6 +8,7 @@ import { ResumePDFWorkExperience } from "./ResumePDFWorkExperience";
 import { ResumePDFEducation } from "./ResumePDFEducations";
 import { ResumePDFProject } from "./ResumePDFProject";
 import { ResumePDFSkills } from "./ResumePDFSkills";
+import { ResumePDFCustom } from "./ResumePDFCustom";
 
 export const ResumePDF = ({
   resume,
@@ -67,7 +68,12 @@ export const ResumePDF = ({
       />
     ),
     custom: () => (
-    <></>
+      <ResumePDFCustom
+        heading={formToHeading["custom"]}
+        custom={custom}
+        themeColor={themeColor}
+        showBulletPoints={showBulletPoints["custom"]}
+      />
     ),
   };
 

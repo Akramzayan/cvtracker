@@ -11,6 +11,7 @@ import { WorkExperiencesForm } from "./WorkExperiencesForm";
 import { EducationsForm } from "./EducationsForm";
 import { ProjectsForm } from "./ProjectsForm";
 import { SkillsForm } from "./SkillsForm";
+import { CustomForm } from "./CustomForm";
 
 
 const formTypeToComponent :{[type in ShowForm] :() => JSX.Element} = {
@@ -18,7 +19,7 @@ const formTypeToComponent :{[type in ShowForm] :() => JSX.Element} = {
   educations:() => <EducationsForm/>  ,
   projects:() => <ProjectsForm/>,
   skills:() => <SkillsForm/>,
-  custom:() => <></>
+  custom:() => <CustomForm/>
 
 }
 

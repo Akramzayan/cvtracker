@@ -19,7 +19,8 @@ export const Resume = () => {
       <div className="relative flex justify-center md:justify-start">
         <FlexBoxspacer maxWidth={50} className="hidden md:block" />
         <div className="relative">
-          <section className="h-[calc(100vh-var(--top-nav-bar-height)-var(--resume-control-bar-height))] overflow-hidden md:p-[var(--resume-padding)]">
+           
+          <section className="h-[calc(100vh-var(--top-nav-bar-height)-var(--resume-control-bar-height))] overflow-hidden md:p-[var(--resume-padding)]">    {/* may i will change the overflow to auto later   */}
             <ResumeIframeCsr documentSize={settings.documentSize} scale={scale}  enablePDFViewer={false}>
               <ResumePDF resume={resume} settings={settings} isPDF={false}/>
             </ResumeIframeCsr>
