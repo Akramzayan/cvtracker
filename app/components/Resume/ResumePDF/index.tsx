@@ -7,6 +7,7 @@ import { ShowForm } from "@/app/lib/redux/settingsSlice";
 import { ResumePDFWorkExperience } from "./ResumePDFWorkExperience";
 import { ResumePDFEducation } from "./ResumePDFEducations";
 import { ResumePDFProject } from "./ResumePDFProject";
+import { ResumePDFSkills } from "./ResumePDFSkills";
 
 export const ResumePDF = ({
   resume,
@@ -17,12 +18,22 @@ export const ResumePDF = ({
   settings: Settings;
   isPDF?: boolean;
 }) => {
-  const { profile, workExperiences,educations,projects } = resume;
+  const { profile, workExperiences, educations, projects, skills, custom } =
+    resume;
   const { name } = profile;
-  const { documentSize, fontFamily, fontSize, themeColor, formToHeading,formsOrder,formToShow,showBulletPoints } =
-    settings;
 
-    const showFormsOrder = formsOrder.filter((form) =>formToShow[form]);
+  const {
+    documentSize,
+    fontFamily,
+    fontSize,
+    themeColor,
+    formToHeading,
+    formsOrder,
+    formToShow,
+    showBulletPoints,
+  } = settings;
+
+  const showFormsOrder = formsOrder.filter((form) => formToShow[form]);
 
   const formTypeToComponent: { [type in ShowForm]: () => JSX.Element } = {
     workExperiences: () => (
@@ -32,24 +43,37 @@ export const ResumePDF = ({
         themeColor={themeColor}
       />
     ),
-    educations:() => <ResumePDFEducation
-    heading={formToHeading["educations"]}
-    educations={educations}
-    themeColor={themeColor}
-    showBulletPoints={showBulletPoints["educations"]}/>,
-    projects:() => <ResumePDFProject 
-    heading={formToHeading["projects"]}
-    projects={projects}
-    themeColor={themeColor}
-    />,
-    skills:() => <></>,
-    custom:() => <></>
-
+    educations: () => (
+      <ResumePDFEducation
+        heading={formToHeading["educations"]}
+        educations={educations}
+        themeColor={themeColor}
+        showBulletPoints={showBulletPoints["educations"]}
+      />
+    ),
+    projects: () => (
+      <ResumePDFProject
+        heading={formToHeading["projects"]}
+        projects={projects}
+        themeColor={themeColor}
+      />
+    ),
+    skills: () => (
+      <ResumePDFSkills
+        heading={formToHeading["skills"]}
+        skills={skills}
+        themeColor={themeColor}
+        showBulletPoints={showBulletPoints["skills"]}
+      />
+    ),
+    custom: () => (
+    <></>
+    ),
   };
 
   return (
     <>
-      <Document title={`${name} Resume`} author={name} producer="CarrerTracker">
+      <Document title={`${name} Resume`} author={name} producer={"CarrerTracker"}>
         <Page
           size={documentSize === "A4" ? "A4" : "LETTER"}
           style={{
@@ -63,7 +87,7 @@ export const ResumePDF = ({
             <View
               style={{
                 width: spacing["full"],
-                height: spacing["3.5"],
+                height: spacing[3.5],
                 backgroundColor: themeColor,
               }}
             />
@@ -71,19 +95,17 @@ export const ResumePDF = ({
           <View
             style={{
               ...styles.flexCol,
-              padding: `${spacing[0]}${spacing[20]}`,
+              padding: `${spacing[0]} ${spacing[20]}`,
             }}
           >
-            {/* <h1>Here Profile Component</h1> */}
             <ResumePDFProfile
               profile={profile}
               themeColor={themeColor}
               isPDF={isPDF}
             />
-            {showFormsOrder.map((form) =>{
-                const Component = formTypeToComponent[form];
-                return <Component key={form}/>;
-
+            {showFormsOrder.map((form) => {
+              const Component = formTypeToComponent[form];
+              return <Component key={form} />;
             })}
           </View>
         </Page>

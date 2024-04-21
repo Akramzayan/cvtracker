@@ -2,7 +2,6 @@ import { Text, View, Link } from "@react-pdf/renderer";
 import type { Style } from "@react-pdf/types";
 import { styles, spacing } from "../styles";
 import { DEFAULT_FONT_COLOR } from "@/app/lib/redux/settingsSlice";
-import React from "react";
 
 export const ResumePDFSection = ({
   themeColor,
@@ -49,89 +48,123 @@ export const ResumePDFSection = ({
   </View>
 );
 
-export const ResumePDFText=({
-    bold=false,
-    themeColor,
-    style={},
-    children
-}:{
-    bold ?: boolean;
-    themeColor?:string;
-    style?:Style;
-    children:React.ReactNode
+export const ResumePDFText = ({
+  bold = false,
+  themeColor,
+  style = {},
+  children,
+}: {
+  bold?: boolean;
+  themeColor?: string;
+  style?: Style;
+  children: React.ReactNode;
 }) => {
-    return (
-        <Text style={{
-            color:themeColor || DEFAULT_FONT_COLOR,
-            fontWeight:bold ? "bold":"normal",
-            ...style
-        }}>
-            {children}
-        </Text>
-    )
-}
-
+  return (
+    <Text
+      style={{
+        color: themeColor || DEFAULT_FONT_COLOR,
+        fontWeight: bold ? "bold" : "normal",
+        ...style,
+      }}
+    >
+      {children}
+    </Text>
+  );
+};
 
 export const ResumePDFLink = ({
   src,
   isPDF,
   children,
-}:{
-  src:string;
-  isPDF:boolean;
-  children:React.ReactNode
+}: {
+  src: string;
+  isPDF: boolean;
+  children: React.ReactNode;
 }) => {
-  if (isPDF){
-    return(
-      <Link src={src} style={{textDecoration:"none"}}>
+  if (isPDF) {
+    return (
+      <Link src={src} style={{ textDecoration: "none" }}>
         {children}
       </Link>
-    )
+    );
   }
-
   return (
-    // This value tells the browser not to send a referrer header when the user clicks on the linked resource.
-    <a href={src} style={{textDecoration:"none"}} target="_blank" rel="noreferrer">
+    <a
+      href={src}
+      style={{ textDecoration: "none" }}
+      target="_blank"
+      rel="noreferrer"
+    >
       {children}
     </a>
-  )
-
-}
-
+  );
+};
 
 export const ResumePDFBulletList = ({
   items,
-  showBulletPoints=true
-}:{
-  items:string[];
-  showBulletPoints?:boolean;
-
+  showBulletPoints = true,
+}: {
+  items: string[];
+  showBulletPoints?: boolean;
 }) => {
   return (
     <>
-    {items.map((item,idx) =>(
-      <View key={idx} style={styles.flexRow}>
-        {showBulletPoints && (
-          <ResumePDFText style={{
-            paddingLeft:spacing["2"],
-            paddingRight:spacing["2"],
-            lineHeight:"1.3"
-            }} 
-            bold={true}>
+      {items.map((item, idx) => (
+        <View style={{ ...styles.flexRow }} key={idx}>
+          {showBulletPoints && (
+            <ResumePDFText
+              style={{
+                paddingLeft: spacing["2"],
+                paddingRight: spacing["2"],
+                lineHeight: "1.3",
+              }}
+              bold={true}
+            >
               {"."}
-          </ResumePDFText>
-        )}
-        <ResumePDFText style={{
-          lineHeight:"1.3",
-          flexGrow:1,
-          flexBasis:0
-          }}>
-          {item}
-          </ResumePDFText>
-        
-      </View>
-    ))}
-    </>
-  )
+            </ResumePDFText>
+          )}
 
-}
+          <ResumePDFText
+            style={{ lineHeight: "1.3", flexGrow: 1, flexBasis: 0 }}
+          >
+            {item}
+          </ResumePDFText>
+        </View>
+      ))}
+    </>
+  );
+};
+
+export const ResumeFeaturedSkill = ({
+  skill,
+  rating,
+  themeColor,
+  style = {},
+}: {
+  skill: string;
+  rating: number;
+  themeColor?: string;
+  style?: Style;
+}) => {
+  const numCircles = 5;
+
+  return (
+    <View style={{ ...styles.flexRow, alignItems: "center", ...style }}>
+      <ResumePDFText style={{ marginRight: spacing[0.5] }}>
+        {skill}
+      </ResumePDFText>
+      {[...Array(numCircles)].map((_, idx) => (
+        <View
+          key={idx}
+          style={{
+            height: "9pt",
+            width: "9pt",
+            marginLeft: "2.25pt",
+            backgroundColor: rating >= idx ? themeColor : "#d9d9d9",
+            borderRadius: "100%",
+          }}
+        />
+      ))}
+    </View>
+  );
+};

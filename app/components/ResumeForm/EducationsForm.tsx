@@ -89,7 +89,7 @@ export const EducationsForm =({}:{}) => {
                   onChange={handleWorkExperienceChange}
                   showBulletPoints={showBulletPoints}
                 />
-                <div className="absolute left-[15.6rem] top-[0.07rem]">
+                <div className="absolute left-[15.9rem] top-[0.07rem]">
                     <BulletListIconButton showBulletPoints={showBulletPoints} onClick={handleShowBulletPoints}/>
 
 
