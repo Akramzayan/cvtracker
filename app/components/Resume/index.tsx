@@ -3,32 +3,53 @@
 import { useAppSelector } from "@/app/lib/redux/hooks";
 import { selectResume } from "@/app/lib/redux/resumeSlice";
 import { selectSettings } from "@/app/lib/redux/settingsSlice";
-import { useState } from "react";
-import { FlexBoxspacer } from "../FlexBoxspacer.";
-import { ResumeIframeCsr } from "./ResumeIFrame";
+import { useMemo, useState } from "react";
+
+
 import { ResumePDFProfile } from "./ResumePDF/ResumePDFProfile";
 import { ResumePDF } from "./ResumePDF";
-import { useRegisterReactPDFHypenationCallback, useRegistreReactPDFFont } from "../fonts/hooks";
+import {
+ 
+  useRegisterReactPDFFont,
+  useRegisterReactPDFHypenationCallback,
+} from "../fonts/hooks";
+import { ResumeControlBarCSR } from "./ResumeControlBar";
+import { FlexBoxspacer } from "../FlexBoxspacer.";
+import { ResumeIframeCsr } from "./ResumeIFrame";
 
 export const Resume = () => {
   const [scale, setScale] = useState(0.8);
   const resume = useAppSelector(selectResume);
   const settings = useAppSelector(selectSettings);
-  useRegistreReactPDFFont();
+  const document = useMemo(
+    () => <ResumePDF resume={resume} settings={settings} isPDF={true} />,
+    [resume, settings]
+  );
 
-  useRegisterReactPDFHypenationCallback(settings.fontFamily)
+  useRegisterReactPDFFont();
+  useRegisterReactPDFHypenationCallback(settings.fontFamily);
 
   return (
     <>
       <div className="relative flex justify-center md:justify-start">
         <FlexBoxspacer maxWidth={50} className="hidden md:block" />
         <div className="relative">
-           
-          <section className="h-[calc(100vh-var(--top-nav-bar-height)-var(--resume-control-bar-height))] overflow-auto md:p-[var(--resume-padding)]">    {/* may i will change the overflow to hidden later   */}
-            <ResumeIframeCsr documentSize={settings.documentSize} scale={scale}  enablePDFViewer={false}>
-              <ResumePDF resume={resume} settings={settings} isPDF={false}/>
+          <section className="h-[calc(100vh-var(--top-nav-bar-height)-var(--resume-control-bar-height))] overflow-hidden md:p-[var(--resume-padding)]">
+            <ResumeIframeCsr
+              documentSize={settings.documentSize}
+              scale={scale}
+              enablePDFViewer={false}
+            >
+              <ResumePDF resume={resume} settings={settings} isPDF={false} />
             </ResumeIframeCsr>
           </section>
+          <ResumeControlBarCSR
+            scale={scale}
+            setScale={setScale}
+            documentSize={settings.documentSize}
+            document={document}
+            fileName={resume.profile.name + " - Resume"}
+          />
         </div>
       </div>
     </>

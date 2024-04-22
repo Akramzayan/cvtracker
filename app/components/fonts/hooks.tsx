@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { FONT_FAMILIES, getAllFontFamiliesToLoad } from "./constants"
 import { Font } from "@react-pdf/renderer"
 
-export const useRegistreReactPDFFont =() => {
+export const useRegisterReactPDFFont =() => {
     useEffect(() => {
         const allFontFamillies = getAllFontFamiliesToLoad()
         allFontFamillies.forEach((fontFamily)=> {
