@@ -12,6 +12,7 @@ import { EducationsForm } from "./EducationsForm";
 import { ProjectsForm } from "./ProjectsForm";
 import { SkillsForm } from "./SkillsForm";
 import { CustomForm } from "./CustomForm";
+import { ThemeForm } from "./ThemeForm";
 
 
 const formTypeToComponent :{[type in ShowForm] :() => JSX.Element} = {
@@ -43,7 +44,7 @@ export const ResumeForm = () => {
             const Component = formTypeToComponent[form]
             return <Component key={form}/>
           })}
-
+        <ThemeForm/>
         </section>
     </div>
   );
