@@ -8,11 +8,15 @@ import { FlexBoxspacer } from "../FlexBoxspacer.";
 import { ResumeIframeCsr } from "./ResumeIFrame";
 import { ResumePDFProfile } from "./ResumePDF/ResumePDFProfile";
 import { ResumePDF } from "./ResumePDF";
+import { useRegisterReactPDFHypenationCallback, useRegistreReactPDFFont } from "../fonts/hooks";
 
 export const Resume = () => {
   const [scale, setScale] = useState(0.8);
   const resume = useAppSelector(selectResume);
   const settings = useAppSelector(selectSettings);
+  useRegistreReactPDFFont();
+
+  useRegisterReactPDFHypenationCallback(settings.fontFamily)
 
   return (
     <>
