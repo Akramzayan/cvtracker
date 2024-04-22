@@ -10,6 +10,7 @@ import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { InlineInput } from "./InlineInput";
 import { THEME_COLORS } from "./constants";
 import { InputGroupWrapper } from "../Form/InputGroup";
+import { FontFamilySlectionCSR } from "./Selection";
 
 export const ThemeForm = () => {
   const settings = useAppSelector(selectSettings);
@@ -42,7 +43,7 @@ export const ThemeForm = () => {
             name={"themeColor"}
           />
           <div className="mt-2 flex flex-wrap gap-2">
-          {THEME_COLORS.map((color, idx) => (
+            {THEME_COLORS.map((color, idx) => (
               <div
                 className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md text-sm text-white"
                 style={{ backgroundColor: color }}
@@ -58,13 +59,18 @@ export const ThemeForm = () => {
                 {settings.themeColor === color ? "$" : ""}
               </div>
             ))}
-
           </div>
         </div>
 
         <div>
-            <InputGroupWrapper label="Font Family"/>
+          <InputGroupWrapper label="Font Family" />
+          <FontFamilySlectionCSR
+            selectedFontFamily={fontFamily}
+            themeColor={themeColor}
+            handleSettingsChange={handleSettingChange}
+          />
         </div>
+        <InlineInput label="Font Size" name="fontSize" value={fontSize} placeHolder="11" onChange={handleSettingChange}/>
       </div>
     </BaseForm>
   );
