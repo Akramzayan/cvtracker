@@ -28,7 +28,7 @@ export const Resume = () => {
 
   useRegisterReactPDFFont();
   useRegisterReactPDFHypenationCallback(settings.fontFamily);
-
+console.log(document)
   return (
     <>
       <div className="relative flex justify-center md:justify-start">

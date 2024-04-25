@@ -26,7 +26,7 @@ export const InputGroupWrapper = ({
 );
 
 export const INPUT_CLASS_NAME =
-  "mt-1 px-3 py-2 block w-full rounded-md border border-gray-300 text-gray-300 shadow-sm outline-none font-normal text-base";
+  "mt-1 px-3 py-2 block w-full rounded-md border border-gray-300 text-black shadow-sm outline-none font-normal text-base"; // colors
 
 export const Input = <K extends string>({
   name,

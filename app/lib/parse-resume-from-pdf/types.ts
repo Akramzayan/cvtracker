@@ -1,5 +1,4 @@
-import { ResumeKey } from "../redux/types";
-
+import type { ResumeKey } from "../redux/types";
 export interface TextItem {
   text: string;
   x: number;
@@ -7,22 +6,23 @@ export interface TextItem {
   width: number;
   height: number;
   fontName: string;
-  hasEndOfLine: boolean;
+  hasEOL: boolean;
 }
 
 export type TextItems = TextItem[];
-export type line = TextItem[];
-export type lines = line[];
 
-export type Subsections = lines[];
+export type Line = TextItem[];
+export type Lines = Line[];
 
-export type ResumeSectionToLines = { [sectionName in ResumeKey]?: lines } & {
-  [otherSectionName: string]: lines;
+export type Subsections = Lines[];
+
+export type ResumeSectionToLines = { [sectionName in ResumeKey]?: Lines } & {
+  [otherSectionName: string]: Lines;
 };
 
 type FeatureScore = -4 | -3 | -2 | -1 | 0 | 1 | 2 | 3 | 4;
-
 type ReturnMatchingTextOnly = boolean;
+
 export type FeatureSet =
   | [(item: TextItem) => boolean, FeatureScore]
   | [
@@ -38,4 +38,3 @@ export interface TextScore {
 }
 
 export type TextScores = TextScore[];
-

@@ -60,8 +60,8 @@ const ResumeControlBar = ({
       </div>
       <a
         className="ml-1 flex items-center gap-1 rounded-md border border-gray-300 px-3 py-0.5 hover:bg-gray-100 lg:ml-8"
-        //href={"data:application/pdf;base64," + instance}
-        href={instance.url!}
+        href={"data:application/pdf;base64," + instance.url!}
+        //href={instance.url!}
         //download={`${fileName}.pdf`}
         download={fileName}
 

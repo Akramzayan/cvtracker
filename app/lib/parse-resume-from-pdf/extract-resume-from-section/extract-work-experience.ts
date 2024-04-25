@@ -1,101 +1,99 @@
-import { get } from "http";
 import { ResumeWorkExperience } from "../../redux/types";
 import { isBold } from "../groupe-lines-into-sections";
+
 import { FeatureSet, ResumeSectionToLines, TextItem } from "../types";
 import { hasNumber } from "./extract-profile";
-import { getBulletPointsFromLines, getDescriptionsLineIdx } from "./lib/bullet-points";
+import {
+  getBulletPointsFromLines,
+  getDescriptionsLineIdx,
+} from "./lib/bullet-points";
 import { DATE_FEATURE_SETS, getHasText } from "./lib/common-features";
 import { getTextWithHighestFeatureScore } from "./lib/feature-scoring-system";
-import { getSectionlinesByKeyword } from "./lib/get-section.lines";
+import { getSectionLinesByKeywords } from "./lib/get-section.lines";
+
+
 import { divideSectionIntoSubsections } from "./lib/subsections";
 
 const WORK_EXPERIENCE_KEYWORDS_LOWERCASE = [
-  "experience",
   "work",
+  "experience",
   "employment",
   "history",
   "job",
 ];
 
 const JOB_TITLES = [
-  "engineer",
-  "developer",
-  "analyst",
-  "manager",
-  "director",
-  "president",
-  "vice president",
-  "vp",
-  "ceo",
-  "cto",
-  "cio",
-  "cfo",
-  "cmo",
-  "cdo",
-  "architecht",
+  "Analyst",
+  "Agent",
+  "Administrator",
+  "Architect",
+  "Assistant",
+  "Associate",
+  "CTO",
 ];
 
-const hadJobTitle = (item: TextItem) =>
+const hasJobTitle = (item: TextItem) =>
   JOB_TITLES.some((jobTitle) =>
     item.text.split(/\s/).some((word) => word === jobTitle)
   );
 
-const hasMoreThan5Words =(item:TextItem) => item.text.split(/\s/).length>5;
-const JOB_TITLES_FEATURE_LIST: FeatureSet[] = [
-    [hadJobTitle, 4],
-    [hasNumber,-4],
-    [hasMoreThan5Words,-2]
+const hasMoreThan5Words = (item: TextItem) => item.text.split(/\s/).length > 5;
 
-]
+const JOB_TITLE_FEATURE_LIST: FeatureSet[] = [
+  [hasJobTitle, 4],
+  [hasNumber, -4],
+  [hasMoreThan5Words, -2],
+];
 
 export const extractWorkExperience = (sections: ResumeSectionToLines) => {
   const workExperiences: ResumeWorkExperience[] = [];
   const workExperiencesScores = [];
-
-  const lines = getSectionlinesByKeyword(
+  const lines = getSectionLinesByKeywords(
     sections,
     WORK_EXPERIENCE_KEYWORDS_LOWERCASE
   );
   const subsections = divideSectionIntoSubsections(lines);
 
   for (const subsectionLines of subsections) {
-    const descriptionsLineIndex =
-    getDescriptionsLineIdx(subsectionLines) ?? 2; // 2 is the default value if it is undefined
+    const descriptionsLineIdx = getDescriptionsLineIdx(subsectionLines) ?? 2;
 
     const subsectionInfoTextItems = subsectionLines
-      .slice(0, descriptionsLineIndex)
+      .slice(0, descriptionsLineIdx)
       .flat();
 
     const [date, dateScores] = getTextWithHighestFeatureScore(
       subsectionInfoTextItems,
       DATE_FEATURE_SETS
     );
-    const [jobTitle, jobTitleScores] = getTextWithHighestFeatureScore(
-        subsectionInfoTextItems,
-        JOB_TITLES_FEATURE_LIST
+
+    const [jobTitle, jonTitleScores] = getTextWithHighestFeatureScore(
+      subsectionInfoTextItems,
+      JOB_TITLE_FEATURE_LIST
     );
 
-    const COMPANY_FEATURE_SET:FeatureSet[]=[
-        [isBold,2],
-        [getHasText(date),-4],
-        [getHasText(jobTitle),4]
-
+    const COMPANY_FEATURE_SET: FeatureSet[] = [
+      [isBold, 2],
+      [getHasText(date), -4],
+      [getHasText(jobTitle), -4],
     ];
 
-    const [company,companyScores] = getTextWithHighestFeatureScore(
-        subsectionInfoTextItems,
-        COMPANY_FEATURE_SET,
-        false
+    const [company, companyScores] = getTextWithHighestFeatureScore(
+      subsectionInfoTextItems,
+      COMPANY_FEATURE_SET,
+      false
     );
 
-const subsectionDescriptionLines = subsectionLines.slice(descriptionsLineIndex);
-const descriptions=getBulletPointsFromLines(subsectionDescriptionLines);
-workExperiences.push({company,date,jobTitle,descriptions});
-workExperiencesScores.push({
-  companyScores,
-  dateScores,
-  jobTitleScores,
-})
+    const subsectionDescriptionLines =
+      subsectionLines.slice(descriptionsLineIdx);
+    const descriptions = getBulletPointsFromLines(subsectionDescriptionLines);
+
+    workExperiences.push({ company, jobTitle, date, descriptions });
+    workExperiencesScores.push({
+      companyScores,
+      jonTitleScores,
+      dateScores,
+    });
   }
-  return{workExperiences,workExperiencesScores};
+
+  return { workExperiences, workExperiencesScores };
 };

@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getHasUsedBefore } from "../lib/redux/local-storage";
+
 import Link from "next/link";
 import { ResumeDropZone } from "../components/ResumeDropZone";
+import { getHasUsedAppBefore } from "../lib/redux/local-storage";
 
 export default function ImportResume() {
   const [hasUsedAppBefore, setHasUsedAppBefore] = useState(false);
@@ -14,7 +15,7 @@ export default function ImportResume() {
   };
 
   useEffect(() => {
-    setHasUsedAppBefore(getHasUsedBefore());
+    setHasUsedAppBefore(getHasUsedAppBefore());
   }, []);
 
   return (

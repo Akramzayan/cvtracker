@@ -5,10 +5,11 @@ import {
   saveStateToLocalStorage,
 } from "./local-storage";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { deepMerge } from "../deep-mergee";
+
 import { initialResumeState, setResume } from "./resumeSlice";
 import { Resume } from "./types";
 import { Settings, initialSettings, setSettings } from "./settingsSlice";
+import { deepMerge } from "../deep-mergee";
 
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

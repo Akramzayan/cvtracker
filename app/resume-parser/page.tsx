@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TextItems } from "../lib/parse-resume-from-pdf/types";
 import { groupTextItemsIntoLines } from "../lib/parse-resume-from-pdf/group-text-items-into-lines";
 import { groupLinesIntoSections } from "../lib/parse-resume-from-pdf/groupe-lines-into-sections";
@@ -12,6 +12,7 @@ import { Paragraph } from "../components/documentation/Paragrapgh";
 import { cx } from "../lib/cx";
 import { ResumeDropZone } from "../components/ResumeDropZone";
 import { ResumeTable } from "./ResumeTable";
+import { readPdf } from "../lib/parse-resume-from-pdf/read-pdf";
 
 const RESUME_EXAMPLES = [
   {
@@ -36,6 +37,14 @@ export default function ResumeParser() {
   const lines = groupTextItemsIntoLines(textItems || []);
   const sections = groupLinesIntoSections(lines);
   const resume = extractResumeFromSections(sections);
+
+  useEffect(() => {
+    async function parse(){
+      const textItems = await readPdf(fileUrl)
+      setTextItems(textItems)
+    }
+    parse()
+  },[fileUrl])
   return (
     <main className="h-full w-full overflow-hidden">
       <div className="grid md:grid-cols-6">

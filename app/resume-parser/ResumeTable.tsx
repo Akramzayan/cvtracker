@@ -31,7 +31,7 @@ const TableRow = ({
     <td className="w-full px-3 py-2">
       {typeof value === "string"
         ? value
-        : value.map((x, idx) => <Fragment key={idx}>.{x}</Fragment>)}
+        : value.map((x, idx) => <Fragment key={idx}>• {x}</Fragment>)}
     </td>
   </tr>
 );
@@ -52,10 +52,11 @@ export const ResumeTable = ({ resume }: { resume: Resume }) => {
     .join(", ")
     .trim();
   if (featuredSkills) {
-    skills.unshift(featuredSkills); // unshift adds the element to the beginning of the array
+    skills.unshift(featuredSkills);
   }
+
   return (
-    <table className="mt-2 w-full border text-sm text-gray-900 ">
+    <table className="mt-2 w-full border text-sm text-gray-900">
       <tbody className="divide-y text-left align-top">
         <TableRowHeader>Profile</TableRowHeader>
         <TableRow label="Name" value={resume.profile.name} />
@@ -99,7 +100,6 @@ export const ResumeTable = ({ resume }: { resume: Resume }) => {
             />
           </Fragment>
         ))}
-
         {resume.projects.length > 0 && (
           <TableRowHeader>Projects</TableRowHeader>
         )}

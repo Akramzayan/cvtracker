@@ -1,11 +1,11 @@
-import { line, lines, TextItems } from "./types";
+import { Line, Lines, TextItems } from "./types";
 
-export const groupTextItemsIntoLines = (textItems: TextItems): lines => {
-  const lines: lines = [];
+export const groupTextItemsIntoLines = (textItems: TextItems): Lines => {
+  const lines: Lines = [];
 
-  let line: line = [];
+  let line: Line = [];
   for (let item of textItems) {
-    if (item.hasEndOfLine) {
+    if (item.hasEOL) {
       if (item.text.trim() !== "") {
         line.push({ ...item });
       }

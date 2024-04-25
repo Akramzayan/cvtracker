@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { FlexBoxspacer } from "../components/FlexBoxspacer."
+import { AutoTypingResume } from "./AutoTypingResume"
 
 export const Hero =() => {
     return (
@@ -28,7 +29,8 @@ export const Hero =() => {
            < FlexBoxspacer maxWidth={100} minWidth={50} className="hidden lg:block"/>
            <div className="mt-6 flex justify-center lg:mt-4 lg:block lg:grow">
             <>
-            <h1>Auto Typing Resume</h1>
+            {/* <h1>Auto Typing Resume</h1> */}
+            <AutoTypingResume/>
             </>
            </div>
 

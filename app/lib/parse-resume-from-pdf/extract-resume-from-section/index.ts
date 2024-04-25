@@ -16,11 +16,7 @@ export const extractResumeFromSections = (
   const { skills } = extractSkills(sections);
 
   return {
-    profile: {
-      ...profile,
-      url: "",
-      summary: "",
-    },
+    profile,
     educations,
     workExperiences,
     projects,

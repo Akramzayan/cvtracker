@@ -1,11 +1,8 @@
-import {  TextItems,TextItem } from "./types";
-
+import { TextItem, TextItems } from "./types";
 import * as pdfjs from "pdfjs-dist";
+
 import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry";
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
-
-
-
 
 import type { TextItem as PdfjsTextItem } from "pdfjs-dist/types/src/display/api";
 
@@ -19,41 +16,42 @@ export const readPdf = async (fileUrl: string): Promise<TextItems> => {
 
     await page.getOperatorList();
     const commonObjs = page.commonObjs;
+
     const pageTextItems = textContent.items.map((item) => {
       const {
-        str:text,
+        str: text,
         dir,
         transform,
-        fontName:pdfFontName,
+        fontName: pdfFontName,
         ...otherProps
+      } = item as PdfjsTextItem;
 
+      const x = transform[4];
+      const y = transform[5];
 
-
-      }=item as PdfjsTextItem;
-      const x =transform[4]
-      const y=transform[5]
       const fontObj = commonObjs.get(pdfFontName);
       const fontName = fontObj.name;
-      const newText = text.replace(/--/g,"-");
-      const newItem ={
+
+      const newText = text.replace(/--/g, "-");
+
+      const newItem = {
         ...otherProps,
         fontName,
-        text:newText,
+        text: newText,
         x,
         y,
-        
       };
-      return newItem
+
+      return newItem;
     });
-    //some changes here
-   // textItems.push(...pageTextItems);
-   textItems.push(...pageTextItems.map((item) => ({ ...item, hasEndOfLine: false })));
-    
+
+    textItems.push(...pageTextItems);
   }
-  const isEmptySpace =(textItem:TextItem)=>!textItem.hasEndOfLine && textItem.text.trim()==="";
-  textItems= textItems.filter((textItem)=>!isEmptySpace(textItem))
+
+  const isEmptySpace = (textItem: TextItem) =>
+    !textItem.hasEOL && textItem.text.trim() === "";
+
+  textItems = textItems.filter((textItem) => !isEmptySpace(textItem));
+
   return textItems;
-}
-
-
-    
+};
