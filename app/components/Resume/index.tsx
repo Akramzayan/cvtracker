@@ -5,17 +5,16 @@ import { selectResume } from "@/app/lib/redux/resumeSlice";
 import { selectSettings } from "@/app/lib/redux/settingsSlice";
 import { useMemo, useState } from "react";
 
-
 import { ResumePDFProfile } from "./ResumePDF/ResumePDFProfile";
 import { ResumePDF } from "./ResumePDF";
 import {
- 
   useRegisterReactPDFFont,
   useRegisterReactPDFHypenationCallback,
 } from "../fonts/hooks";
 import { ResumeControlBarCSR } from "./ResumeControlBar";
 import { FlexBoxspacer } from "../FlexBoxspacer.";
-import { ResumeIframeCsr } from "./ResumeIFrame";
+import { ResumeIFrameCSR } from "./ResumeIFrame";
+
 
 export const Resume = () => {
   const [scale, setScale] = useState(0.8);
@@ -28,20 +27,20 @@ export const Resume = () => {
 
   useRegisterReactPDFFont();
   useRegisterReactPDFHypenationCallback(settings.fontFamily);
-console.log(document)
+
   return (
     <>
       <div className="relative flex justify-center md:justify-start">
         <FlexBoxspacer maxWidth={50} className="hidden md:block" />
         <div className="relative">
           <section className="h-[calc(100vh-var(--top-nav-bar-height)-var(--resume-control-bar-height))] overflow-hidden md:p-[var(--resume-padding)]">
-            <ResumeIframeCsr
+            <ResumeIFrameCSR
               documentSize={settings.documentSize}
               scale={scale}
               enablePDFViewer={false}
             >
               <ResumePDF resume={resume} settings={settings} isPDF={false} />
-            </ResumeIframeCsr>
+            </ResumeIFrameCSR>
           </section>
           <ResumeControlBarCSR
             scale={scale}

@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/app/lib/redux/hooks"
-import { changeEducation, selectEducations } from "@/app/lib/redux/resumeSlice"
+import {  changeEducations, selectEducations } from "@/app/lib/redux/resumeSlice"
 import { changeShowBulletPoints, selectShowBulletPoints } from "@/app/lib/redux/settingsSlice"
 import { BulletListTextArea, Input } from "./Form/InputGroup"
 import { Form, FormSection } from "./Form"
@@ -25,7 +25,7 @@ export const EducationsForm =({}:{}) => {
                 value,
               ]: CreateHandleChangeArgsWithDescriptions<ResumeEducation>
             ) => {
-              dispatch(changeEducation({ idx, field, value } as any));
+              dispatch(changeEducations({ idx, field, value } as any));
             };
 
             const handleShowBulletPoints =(value:boolean) =>{

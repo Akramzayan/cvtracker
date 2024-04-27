@@ -16,15 +16,14 @@ import {
   WrenchIcon,
 } from "@heroicons/react/24/outline";
 import { Input } from "./InputGroup";
-import {  DeleteIconButton, MoveIconButton, ShowIconButton } from "./IconButton";
-
+import { DeleteIconButton, MoveIconButton, ShowIconButton } from "./IconButton";
+import { ExpenderWithHeightTransition } from "../../ExpenderWithHeightTransition";
 import {
   addSectionInForm,
-  removeSectionInFormByidx,
+  deleteSectionInFormByIdx,
   moveSectionInForm,
 } from "@/app/lib/redux/resumeSlice";
 import { PlusSmallIcon } from "@heroicons/react/24/outline";
-import { ExpenderWithHeightTransition } from "../../ExpenderWithHeightTransition";
 
 const FORM_TO_ICON: { [section in ShowForm]: typeof BuildingOfficeIcon } = {
   workExperiences: BuildingOfficeIcon,
@@ -146,7 +145,7 @@ export const FormSection = ({
   const dispatch = useAppDispatch();
 
   const handleDeleteClick = () => {
-    dispatch(removeSectionInFormByidx({ form, idx }));
+    dispatch(deleteSectionInFormByIdx({ form, idx }));
   };
 
   const handleMoveClick = (direction: "up" | "down") => {
@@ -188,7 +187,10 @@ export const FormSection = ({
               showDelete ? "" : "invisible opacity-0"
             }`}
           >
-          <DeleteIconButton onClick={handleDeleteClick} tooltipText={deleteButtonTooltipText}  />
+            <DeleteIconButton
+              onClick={handleDeleteClick}
+              tooltipText={deleteButtonTooltipText}
+            />
           </div>
         </div>
       </div>

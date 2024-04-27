@@ -5,10 +5,11 @@ import { styles, spacing } from "./styles";
 import { ResumePDFProfile } from "./ResumePDFProfile";
 import { ShowForm } from "@/app/lib/redux/settingsSlice";
 import { ResumePDFWorkExperience } from "./ResumePDFWorkExperience";
-import { ResumePDFEducation } from "./ResumePDFEducations";
+
 import { ResumePDFProject } from "./ResumePDFProject";
 import { ResumePDFSkills } from "./ResumePDFSkills";
 import { ResumePDFCustom } from "./ResumePDFCustom";
+import { ResumePDFEducation } from "./ResumePDFEducations";
 
 export const ResumePDF = ({
   resume,

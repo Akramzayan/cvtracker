@@ -5,7 +5,7 @@ import { deepClone } from "../lib/parse-resume-from-pdf/deep-clone";
 import { initialResumeState } from "../lib/redux/resumeSlice";
 import { makeObjectCharIterator } from "../lib/make-object-char-iterator";
 import { END_HOME_RESUME, START_HOME_RESUME } from "./constants";
-import { ResumeIframeCsr } from "../components/Resume/ResumeIFrame";
+import { ResumeIFrameCSR } from "../components/Resume/ResumeIFrame";
 import { ResumePDF } from "../components/Resume/ResumePDF";
 import { initialSettings } from "../lib/redux/settingsSlice";
 
@@ -47,7 +47,7 @@ export const AutoTypingResume = () => {
 
   return (
     <>
-      <ResumeIframeCsr documentSize="Letter" scale={0.7}>
+      <ResumeIFrameCSR documentSize="Letter" scale={0.7}>
         <ResumePDF
           resume={resume}
           settings={{
@@ -64,7 +64,7 @@ export const AutoTypingResume = () => {
             },
           }}/>
        
-      </ResumeIframeCsr>
+      </ResumeIFrameCSR>
     </>
   );
 };

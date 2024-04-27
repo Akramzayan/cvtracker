@@ -6,7 +6,7 @@ import { LockClosedIcon,XMarkIcon  } from "@heroicons/react/20/solid";
 import { parseResumeFromPdf } from "../lib/parse-resume-from-pdf";
 import { deepClone } from "../lib/parse-resume-from-pdf/deep-clone";
 import { ShowForm, initialSettings } from "../lib/redux/settingsSlice";
-import { getHasUsedBefore, saveStateToLocalStorage } from "../lib/redux/local-storage";
+import {  getHasUsedAppBefore, saveStateToLocalStorage } from "../lib/redux/local-storage";
 import { useRouter } from "next/navigation";
 const defaultFileState = {
     name: "",
@@ -79,7 +79,7 @@ export const ResumeDropZone =({
     const onImportClick = async () => {
     const resume = await parseResumeFromPdf(file.fileUrl);
     const settings = deepClone(initialSettings);
-    if (getHasUsedBefore()) {
+    if (getHasUsedAppBefore()) {
       const sections = Object.keys(settings.formToShow) as ShowForm[];
       const sectionToFormToShow: Record<ShowForm, boolean> = {
         workExperiences: resume.workExperiences.length > 0,
