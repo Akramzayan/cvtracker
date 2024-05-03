@@ -80,7 +80,7 @@ export const ResumePDF = ({
 
   return (
     <>
-      <Document title={`${name} Resume`} author={name} producer={"CarrerTracker"}>
+      <Document title={`${name} Resume`} author={name} producer={"Inhouse"}>
         <Page
           size={documentSize === "A4" ? "A4" : "LETTER"}
           style={{

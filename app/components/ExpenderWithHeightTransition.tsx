@@ -1,4 +1,4 @@
-export const ExpenderWithHeightTransition = ({
+export const ExpanderWithHeightTransition = ({
     expanded,
     children
 }:{

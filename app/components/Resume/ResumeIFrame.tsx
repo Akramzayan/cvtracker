@@ -79,4 +79,3 @@ const ResumeIFrame = ({
 export const ResumeIFrameCSR = dynamic(() => Promise.resolve(ResumeIFrame), {
   ssr: false,
 });
-// dynamic This is a function provided by Next.js for dynamic imports. It allows you to dynamically import components, which can be useful for lazy loading, code splitting, and server-side rendering.

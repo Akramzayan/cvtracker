@@ -19,7 +19,7 @@ export const Hero =() => {
                     <p className="ml-6 mt-3 text-sm text-bold  btn-primary"> Get Started</p>
                     <p className="mt-3 text-sm text-bold text-gray-600 lg:mt-36">
                         Already Have a Resume ? Test its ATS Readabilty Here with the {""}
-                        <Link href={"/resume-parser"} className="underline underline-offset-2">
+                        <Link href={"/ats-checker"} className="underline underline-offset-2">
                             Resume Parser
                         </Link>
                     </p>

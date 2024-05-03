@@ -6,8 +6,9 @@ import {
 } from "@heroicons/react/24/outline";
 import dynamic from "next/dynamic";
 import { useSetDefaultScale } from "./hooks";
-import { usePDF } from "@react-pdf/renderer";
+import { PDFDownloadLink, usePDF } from "@react-pdf/renderer";
 import { useEffect } from "react";
+import Link from "next/link";
 
 const ResumeControlBar = ({
   scale,
@@ -28,6 +29,7 @@ const ResumeControlBar = ({
   });
 
   const [instance, update] = usePDF({ document });
+  console.log(document)
 
   useEffect(() => {
     update(document);
@@ -62,14 +64,12 @@ const ResumeControlBar = ({
         className="ml-1 flex items-center gap-1 rounded-md border border-gray-300 px-3 py-0.5 hover:bg-gray-100 lg:ml-8"
         href={"data:application/pdf;base64," + instance.url!}
         //href={instance.url!}
-      //download={`${fileName}.pdf`}
-        //download={fileName}
-        download={`${fileName}.pdf`}
-
+      download={fileName}
         
-      
-       
+     
+
       >
+       
         <ArrowDownTrayIcon className="h-4 w-4" />
         <span className="whitespace-nowrap">Download Resume </span>
       </a>

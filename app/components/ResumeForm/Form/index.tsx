@@ -15,9 +15,9 @@ import {
   LightBulbIcon,
   WrenchIcon,
 } from "@heroicons/react/24/outline";
-import { Input } from "./InputGroup";
+
 import { DeleteIconButton, MoveIconButton, ShowIconButton } from "./IconButton";
-import { ExpenderWithHeightTransition } from "../../ExpenderWithHeightTransition";
+import { ExpanderWithHeightTransition } from "../../ExpenderWithHeightTransition";
 import {
   addSectionInForm,
   deleteSectionInFormByIdx,
@@ -104,9 +104,9 @@ export const Form = ({
           <ShowIconButton show={showForm} setShow={setShowForm} />
         </div>
       </div>
-      <ExpenderWithHeightTransition expanded={showForm}>
+      <ExpanderWithHeightTransition expanded={showForm}>
         {children}
-      </ExpenderWithHeightTransition>
+      </ExpanderWithHeightTransition>
       {showForm && addButtonText && (
         <div className="mt-2 flex justify-end">
           <button
