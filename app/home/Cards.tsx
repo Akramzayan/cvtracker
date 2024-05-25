@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Heading } from "../components/Heading"
 
 import Image from "next/image";
@@ -7,12 +8,14 @@ import Image from "next/image";
         id: "0",
         title: "Resume Builder",
         text: "Quickly craft a standout professional resume with our intuitive Resume Builder, designed around a single, adaptable template that showcases your unique strengths.",
+        link: "/resume-builder",
       
       },
       {
         id: "1",
         title: " ATS Checker",
         text: "Enhance your resume's success with our ATS Checker. This tool optimizes your resume for applicant tracking systems, increasing your visibility to potential employers..",
+        link: "/resume-parser",
      
    
       },
@@ -20,6 +23,7 @@ import Image from "next/image";
         id: "2",
         title: "Interview Mockup",
         text: "Master your interview skills with our Interview Mockup tool, powered by an advanced AI model. Engage in realistic simulations, refine your responses, and gain valuable feedback to boost your confidence and performance.",
+        link: "/interview-mockup",
         
    
       },
@@ -33,7 +37,8 @@ export const Cards = () => {
             className="md:max-w-md lg:max-w-2xl"
              title=" CarrerTracker Services "/>
              <div className="flex flex-wrap ga-10 mb-10   ">
-                {cardsInfo.map((item) => (
+                {cardsInfo.map((item,id) => (
+                  <Link href={item.link} key={id}>
                     <div
                         className="block relative p-0.5 bg-primary bg-no-repeat bg-[length:100%_100%]
                         md:max-w-[24rem] m-10  border rounded-2xl rounded-tr-[80px] cursor-pointer btn-primary"
@@ -47,6 +52,7 @@ export const Cards = () => {
                             </div>
                         </div>
                     </div>
+                  </Link>
                 ))}
 
              </div>

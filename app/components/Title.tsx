@@ -50,16 +50,7 @@ function Title({ setMessages }: Props) {
           </svg>
         </button>
       </div>
-      <div className="flex flex-col p-3 text-white mx-[300px] border rounded-lg h-auto">
-        <div className="text-black">hdzdza</div>
-        <div className="text-black">hdzadazdaz</div>
-        <div className="text-black">hdzdza</div>
-        <div className="text-black">hdzadazdaz</div>
-        <div className="text-black">hdzdza</div>
-        <div className="text-black">hdzadazdaz</div>
-        <div className="text-black">hdzdza</div>
-        <div className="text-black">hdzadazdaz</div>
-      </div>
+    
     </>
   );
 }
