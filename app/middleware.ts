@@ -1,0 +1,1 @@
+export {auth as middleware} from "@/app/auth"; // Exporting the auth object from the auth.ts file
