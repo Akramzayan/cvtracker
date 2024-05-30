@@ -4,10 +4,24 @@ import axios from 'axios';
 
 import Title from '../components/Title';
 import dynamic from 'next/dynamic';
+import { getSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+
 // Dynamically import the Record component with SSR disabled
 const Record = dynamic(() => import('../components/Record'), { ssr: false });
 
 const Interview_mockup = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const session = await getSession();
+      if (!session) {
+        router.push('/api/auth/signin?callbackUrl=/interview-mockup');
+      }
+    };
+    checkAuth();
+  }, []);
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [messages,setMessages]=useState<any[]>([]);
