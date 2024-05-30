@@ -44,7 +44,7 @@ const Interview_mockup = () => {
     const formData = new FormData();
     formData.append("file",blob,"myFile.wav");
     // Send formDaata to API endpoint 
-    await axios.post("http://localhost:8000/post-audio",formData,{headers:{"contetnt-Type":"audio/mpeg"},
+    await axios.post("http://localhost:8000/post-audio",formData,{headers:{"content-Type":"audio/mpeg"},
   responseType:"arraybuffer",
 }).then((res:any)=> {
   const blob = res.data;

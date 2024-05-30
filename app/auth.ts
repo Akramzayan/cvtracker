@@ -5,7 +5,7 @@ import Google from "next-auth/providers/google"
  
 export const { handlers, signIn, signOut, auth } = NextAuth({
   theme:{
-    logo:"https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png",
+    logo:"/assets/logo.svg",
     brandColor:"#4285F4",
     colorScheme:"auto",
     

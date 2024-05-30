@@ -24,7 +24,7 @@ export const TopNavbar = () => {
         <Link href="/">
           <div className="flex justify-center items-center gap-1">
             <Image
-              src={"/assets/heart.svg"}
+              src={"/assets/logo.svg"}
               width={16}
               height={16}
               alt="Logo"
